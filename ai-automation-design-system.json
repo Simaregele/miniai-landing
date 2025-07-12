@@ -1,0 +1,331 @@
+{
+  "designSystem": {
+    "name": "AI Automation Landing Page",
+    "version": "1.0.0",
+    "description": "Modern dark-themed design system for AI/tech companies with gradient backgrounds and clean typography",
+    
+    "colorPalette": {
+      "primary": {
+        "background": "#1a2332",
+        "backgroundGradient": "linear-gradient(135deg, #1a2332 0%, #2a3a4a 50%, #1a2332 100%)",
+        "surface": "#243447",
+        "surfaceElevated": "#2a3a4a"
+      },
+      "accent": {
+        "primary": "#00d4aa",
+        "primaryHover": "#00b894",
+        "secondary": "#4ecdc4",
+        "glow": "rgba(0, 212, 170, 0.3)"
+      },
+      "text": {
+        "primary": "#ffffff",
+        "secondary": "#b8c5d1",
+        "muted": "#8a9ba8",
+        "accent": "#00d4aa"
+      },
+      "semantic": {
+        "success": "#00d4aa",
+        "info": "#4ecdc4",
+        "warning": "#ffd93d",
+        "error": "#ff6b6b"
+      }
+    },
+
+    "typography": {
+      "fontFamily": {
+        "primary": "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+        "heading": "Inter, sans-serif",
+        "body": "Inter, sans-serif"
+      },
+      "fontWeights": {
+        "light": 300,
+        "regular": 400,
+        "medium": 500,
+        "semibold": 600,
+        "bold": 700,
+        "extrabold": 800
+      },
+      "fontSizes": {
+        "xs": "12px",
+        "sm": "14px",
+        "base": "16px",
+        "lg": "18px",
+        "xl": "20px",
+        "2xl": "24px",
+        "3xl": "30px",
+        "4xl": "36px",
+        "5xl": "48px",
+        "6xl": "60px"
+      },
+      "lineHeights": {
+        "tight": 1.2,
+        "normal": 1.5,
+        "relaxed": 1.6,
+        "loose": 1.8
+      },
+      "letterSpacing": {
+        "tight": "-0.025em",
+        "normal": "0",
+        "wide": "0.025em",
+        "wider": "0.05em"
+      }
+    },
+
+    "spacing": {
+      "xs": "4px",
+      "sm": "8px",
+      "md": "16px",
+      "lg": "24px",
+      "xl": "32px",
+      "2xl": "48px",
+      "3xl": "64px",
+      "4xl": "80px",
+      "5xl": "96px",
+      "6xl": "128px"
+    },
+
+    "borderRadius": {
+      "none": "0",
+      "sm": "4px",
+      "md": "8px",
+      "lg": "12px",
+      "xl": "16px",
+      "2xl": "24px",
+      "full": "9999px"
+    },
+
+    "shadows": {
+      "sm": "0 1px 2px rgba(0, 0, 0, 0.05)",
+      "md": "0 4px 6px rgba(0, 0, 0, 0.1)",
+      "lg": "0 10px 15px rgba(0, 0, 0, 0.1)",
+      "xl": "0 20px 25px rgba(0, 0, 0, 0.1)",
+      "glow": "0 0 20px rgba(0, 212, 170, 0.3)",
+      "glowLarge": "0 0 40px rgba(0, 212, 170, 0.2)"
+    },
+
+    "layout": {
+      "maxWidth": "1200px",
+      "containerPadding": "24px",
+      "sectionSpacing": "80px",
+      "gridGap": "24px",
+      "breakpoints": {
+        "sm": "640px",
+        "md": "768px",
+        "lg": "1024px",
+        "xl": "1280px",
+        "2xl": "1536px"
+      }
+    },
+
+    "components": {
+      "header": {
+        "height": "80px",
+        "background": "transparent",
+        "backdropFilter": "blur(10px)",
+        "borderBottom": "1px solid rgba(255, 255, 255, 0.1)",
+        "padding": "0 24px",
+        "logo": {
+          "fontSize": "24px",
+          "fontWeight": "bold",
+          "color": "#00d4aa",
+          "letterSpacing": "wide"
+        },
+        "navigation": {
+          "fontSize": "16px",
+          "fontWeight": "medium",
+          "color": "#ffffff",
+          "spacing": "32px",
+          "hoverColor": "#00d4aa"
+        }
+      },
+
+      "hero": {
+        "padding": "80px 0 120px",
+        "background": "linear-gradient(135deg, #1a2332 0%, #2a3a4a 50%, #1a2332 100%)",
+        "layout": "two-column",
+        "title": {
+          "fontSize": "60px",
+          "fontWeight": "extrabold",
+          "lineHeight": "tight",
+          "color": "#ffffff",
+          "marginBottom": "24px",
+          "letterSpacing": "tight"
+        },
+        "subtitle": {
+          "fontSize": "20px",
+          "fontWeight": "regular",
+          "lineHeight": "relaxed",
+          "color": "#b8c5d1",
+          "marginBottom": "32px"
+        },
+        "cta": {
+          "fontSize": "16px",
+          "fontWeight": "semibold",
+          "padding": "16px 32px",
+          "background": "#00d4aa",
+          "color": "#1a2332",
+          "borderRadius": "full",
+          "boxShadow": "glow",
+          "hoverBackground": "#00b894"
+        },
+        "illustration": {
+          "type": "outline-style",
+          "color": "#00d4aa",
+          "strokeWidth": "2px",
+          "style": "minimal-line-art"
+        }
+      },
+
+      "card": {
+        "default": {
+          "background": "#243447",
+          "borderRadius": "xl",
+          "padding": "32px",
+          "boxShadow": "lg",
+          "border": "1px solid rgba(255, 255, 255, 0.1)",
+          "hoverTransform": "translateY(-4px)",
+          "transition": "all 0.3s ease"
+        },
+        "icon": {
+          "size": "48px",
+          "color": "#00d4aa",
+          "marginBottom": "16px",
+          "strokeWidth": "2px"
+        },
+        "title": {
+          "fontSize": "24px",
+          "fontWeight": "semibold",
+          "color": "#ffffff",
+          "marginBottom": "12px"
+        },
+        "description": {
+          "fontSize": "16px",
+          "fontWeight": "regular",
+          "color": "#b8c5d1",
+          "lineHeight": "relaxed"
+        }
+      },
+
+      "section": {
+        "padding": "80px 0",
+        "title": {
+          "fontSize": "48px",
+          "fontWeight": "bold",
+          "color": "#ffffff",
+          "marginBottom": "48px",
+          "textAlign": "left",
+          "letterSpacing": "tight"
+        }
+      },
+
+      "tabs": {
+        "container": {
+          "display": "flex",
+          "marginBottom": "32px",
+          "gap": "8px"
+        },
+        "tab": {
+          "padding": "12px 24px",
+          "fontSize": "16px",
+          "fontWeight": "medium",
+          "borderRadius": "lg",
+          "transition": "all 0.2s ease",
+          "default": {
+            "background": "transparent",
+            "color": "#b8c5d1",
+            "border": "1px solid rgba(255, 255, 255, 0.2)"
+          },
+          "active": {
+            "background": "#00d4aa",
+            "color": "#1a2332",
+            "boxShadow": "glow"
+          }
+        }
+      },
+
+      "form": {
+        "container": {
+          "background": "#243447",
+          "borderRadius": "xl",
+          "padding": "32px",
+          "border": "1px solid rgba(255, 255, 255, 0.1)"
+        },
+        "input": {
+          "background": "#1a2332",
+          "border": "1px solid rgba(255, 255, 255, 0.2)",
+          "borderRadius": "lg",
+          "padding": "16px",
+          "fontSize": "16px",
+          "color": "#ffffff",
+          "placeholder": "#8a9ba8",
+          "focusBorder": "#00d4aa",
+          "focusBoxShadow": "0 0 0 3px rgba(0, 212, 170, 0.1)"
+        },
+        "button": {
+          "background": "#00d4aa",
+          "color": "#1a2332",
+          "fontSize": "16px",
+          "fontWeight": "semibold",
+          "padding": "16px 32px",
+          "borderRadius": "full",
+          "boxShadow": "glow",
+          "hoverBackground": "#00b894"
+        }
+      }
+    },
+
+    "designPrinciples": {
+      "contrast": "High contrast with dark backgrounds and bright accent colors",
+      "hierarchy": "Clear visual hierarchy using size, weight, and color",
+      "spacing": "Generous whitespace with consistent rhythm",
+      "interaction": "Subtle hover effects and smooth transitions",
+      "accessibility": "WCAG compliant color contrasts and focus states",
+      "responsive": "Mobile-first approach with fluid layouts"
+    },
+
+    "visualEffects": {
+      "gradients": {
+        "background": "linear-gradient(135deg, #1a2332 0%, #2a3a4a 50%, #1a2332 100%)",
+        "accent": "linear-gradient(45deg, #00d4aa 0%, #4ecdc4 100%)",
+        "subtle": "linear-gradient(180deg, rgba(255,255,255,0.05) 0%, transparent 100%)"
+      },
+      "animations": {
+        "fadeIn": "opacity 0.6s ease-in-out",
+        "slideUp": "transform 0.6s ease-out",
+        "hover": "all 0.3s ease",
+        "glow": "box-shadow 0.3s ease"
+      },
+      "filters": {
+        "backdrop": "blur(10px)",
+        "glassmorphism": "backdrop-filter: blur(10px); background: rgba(255, 255, 255, 0.1)"
+      }
+    },
+
+    "contentStructure": {
+      "sections": [
+        {
+          "name": "header",
+          "elements": ["logo", "navigation", "cta"]
+        },
+        {
+          "name": "hero",
+          "elements": ["headline", "subtitle", "cta", "illustration"]
+        },
+        {
+          "name": "features",
+          "elements": ["section-title", "feature-cards"]
+        },
+        {
+          "name": "case-studies",
+          "elements": ["section-title", "tabs", "case-study-card", "contact-form"]
+        }
+      ],
+      "patterns": {
+        "two-column-layout": "Text content on left, visual on right",
+        "card-grid": "3-column grid on desktop, single column on mobile",
+        "tabbed-content": "Horizontal tabs with content panels",
+        "side-by-side": "Content and form in equal columns"
+      }
+    }
+  }
+} 

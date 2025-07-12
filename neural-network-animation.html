@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Нейронная сеть - анимация</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: transparent;
+            overflow: hidden;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .network-svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .connection {
+            stroke: rgba(255, 255, 255, 0.2);
+            stroke-width: 1;
+            fill: none;
+        }
+
+        .node {
+            fill: #ffffff;
+            stroke: rgba(255, 255, 255, 0.8);
+            stroke-width: 1;
+            filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.3));
+        }
+
+        .node.active {
+            fill: #87ceeb;
+            stroke: #ffffff;
+            stroke-width: 2;
+            filter: drop-shadow(0 0 15px rgba(135, 206, 235, 0.8));
+            animation: nodeGlow 2s ease-in-out;
+        }
+
+        @keyframes nodeGlow {
+            0% { 
+                transform: scale(1);
+                filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.3));
+            }
+            50% { 
+                transform: scale(1.2);
+                filter: drop-shadow(0 0 20px rgba(135, 206, 235, 1));
+            }
+            100% { 
+                transform: scale(1);
+                filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.3));
+            }
+        }
+
+        .connection.active {
+            stroke: rgba(135, 206, 235, 0.8);
+            stroke-width: 2;
+            animation: connectionGlow 1s ease-in-out;
+        }
+
+        @keyframes connectionGlow {
+            0% { 
+                stroke-width: 1;
+                stroke: rgba(255, 255, 255, 0.2);
+            }
+            50% { 
+                stroke-width: 3;
+                stroke: rgba(135, 206, 235, 1);
+            }
+            100% { 
+                stroke-width: 1;
+                stroke: rgba(255, 255, 255, 0.2);
+            }
+        }
+    </style>
+</head>
+<body>
+    <svg class="network-svg" id="networkSvg">
+        <!-- Нейронная сеть генерируется здесь -->
+    </svg>
+
+    <script>
+        class SimpleNeuralNetwork {
+            constructor() {
+                this.svg = document.getElementById('networkSvg');
+                this.nodes = [];
+                this.connections = [];
+                this.currentActiveNode = 0;
+                this.animationSpeed = 1500; // миллисекунды между активациями
+                
+                this.init();
+                this.startAnimation();
+            }
+
+            init() {
+                const width = window.innerWidth;
+                const height = window.innerHeight;
+                
+                this.createDenseNetwork(width, height);
+            }
+
+            createDenseNetwork(width, height) {
+                // Создаем плотную сеть узлов
+                const gridCols = 12;
+                const gridRows = 8;
+                const paddingX = width * 0.1;
+                const paddingY = height * 0.1;
+                const stepX = (width - paddingX * 2) / (gridCols - 1);
+                const stepY = (height - paddingY * 2) / (gridRows - 1);
+
+                // Создаем узлы в сетке с небольшим случайным смещением
+                for (let row = 0; row < gridRows; row++) {
+                    for (let col = 0; col < gridCols; col++) {
+                        const baseX = paddingX + col * stepX;
+                        const baseY = paddingY + row * stepY;
+                        
+                        // Добавляем случайное смещение для органичности
+                        const offsetX = (Math.random() - 0.5) * 30;
+                        const offsetY = (Math.random() - 0.5) * 30;
+                        
+                        const node = {
+                            id: this.nodes.length,
+                            x: baseX + offsetX,
+                            y: baseY + offsetY,
+                            active: false,
+                            element: null,
+                            connections: []
+                        };
+                        
+                        this.nodes.push(node);
+                        this.createNodeElement(node);
+                    }
+                }
+
+                // Создаем связи между близкими узлами
+                this.createConnections();
+            }
+
+            createNodeElement(node) {
+                const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                circle.setAttribute('cx', node.x);
+                circle.setAttribute('cy', node.y);
+                circle.setAttribute('r', 4);
+                circle.setAttribute('class', 'node');
+                
+                node.element = circle;
+                this.svg.appendChild(circle);
+            }
+
+            createConnections() {
+                // Создаем связи между узлами
+                for (let i = 0; i < this.nodes.length; i++) {
+                    const node1 = this.nodes[i];
+                    
+                    for (let j = i + 1; j < this.nodes.length; j++) {
+                        const node2 = this.nodes[j];
+                        const distance = Math.sqrt(
+                            Math.pow(node1.x - node2.x, 2) + 
+                            Math.pow(node1.y - node2.y, 2)
+                        );
+                        
+                        // Создаем связи с близкими узлами
+                        if (distance < 120) {
+                            this.createConnection(node1, node2);
+                        }
+                    }
+                }
+            }
+
+            createConnection(node1, node2) {
+                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                line.setAttribute('x1', node1.x);
+                line.setAttribute('y1', node1.y);
+                line.setAttribute('x2', node2.x);
+                line.setAttribute('y2', node2.y);
+                line.setAttribute('class', 'connection');
+                
+                const connection = {
+                    from: node1.id,
+                    to: node2.id,
+                    element: line
+                };
+                
+                this.connections.push(connection);
+                node1.connections.push(node2.id);
+                node2.connections.push(node1.id);
+                
+                // Вставляем связи под узлы
+                this.svg.insertBefore(line, this.svg.firstChild);
+            }
+
+            startAnimation() {
+                this.animateNetwork();
+            }
+
+            animateNetwork() {
+                // Активируем текущий узел
+                this.activateNode(this.currentActiveNode);
+                
+                // Переходим к следующему узлу
+                setTimeout(() => {
+                    this.deactivateNode(this.currentActiveNode);
+                    
+                    // Выбираем следующий узел из связанных или случайный
+                    const currentNode = this.nodes[this.currentActiveNode];
+                    if (currentNode.connections.length > 0) {
+                        // Выбираем случайный связанный узел
+                        const randomConnectionIndex = Math.floor(Math.random() * currentNode.connections.length);
+                        this.currentActiveNode = currentNode.connections[randomConnectionIndex];
+                    } else {
+                        // Если нет связей, выбираем случайный узел
+                        this.currentActiveNode = Math.floor(Math.random() * this.nodes.length);
+                    }
+                    
+                    // Продолжаем анимацию
+                    this.animateNetwork();
+                }, this.animationSpeed);
+            }
+
+            activateNode(nodeId) {
+                const node = this.nodes[nodeId];
+                node.active = true;
+                node.element.classList.add('active');
+                
+                // Активируем связи этого узла
+                this.connections.forEach(connection => {
+                    if (connection.from === nodeId || connection.to === nodeId) {
+                        connection.element.classList.add('active');
+                        
+                        // Убираем активность связи через некоторое время
+                        setTimeout(() => {
+                            connection.element.classList.remove('active');
+                        }, 1000);
+                    }
+                });
+            }
+
+            deactivateNode(nodeId) {
+                const node = this.nodes[nodeId];
+                node.active = false;
+                node.element.classList.remove('active');
+            }
+        }
+
+        // Запускаем анимацию при загрузке
+        window.addEventListener('load', () => {
+            new SimpleNeuralNetwork();
+        });
+
+        // Перезапускаем при изменении размера окна
+        window.addEventListener('resize', () => {
+            document.getElementById('networkSvg').innerHTML = '';
+            new SimpleNeuralNetwork();
+        });
+    </script>
+</body>
+</html> 
