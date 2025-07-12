@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MiniAI - Студия автоматизации бизнес-процессов с ИИ</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
+    <style>
         :root {
             /* Color Palette */
             --primary-bg: #1a2332;
@@ -77,10 +77,9 @@
 
         .header-content {
             display: flex;
-            align-items: flex-end;
+            align-items: center;
             justify-content: space-between;
             height: 100%;
-            padding-bottom: 10px;
         }
 
         .logo {
@@ -116,7 +115,6 @@
             font-weight: 600;
             transition: all 0.3s ease;
             box-shadow: var(--shadow-glow);
-            margin-top: 15px; /* Убеждаемся, что кнопка выровнена с остальными элементами */
         }
 
         .header-cta:hover {
@@ -130,49 +128,6 @@
             background: var(--primary-bg-gradient);
             position: relative;
             overflow: hidden;
-            width: 100vw;
-            margin-left: calc(50% - 50vw);
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(0, 212, 170, 0.15) 0%, transparent 60%),
-                radial-gradient(circle at 80% 20%, rgba(0, 212, 170, 0.08) 0%, transparent 60%),
-                radial-gradient(circle at 40% 80%, rgba(0, 212, 170, 0.12) 0%, transparent 60%),
-                radial-gradient(circle at 60% 30%, rgba(77, 236, 196, 0.06) 0%, transparent 50%);
-            backdrop-filter: blur(120px);
-            z-index: 0;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            right: -50%;
-            bottom: -50%;
-            background: 
-                conic-gradient(from 0deg at 50% 50%, 
-                    transparent 0deg, 
-                    rgba(0, 212, 170, 0.03) 60deg, 
-                    transparent 120deg, 
-                    rgba(0, 212, 170, 0.05) 180deg, 
-                    transparent 240deg, 
-                    rgba(0, 212, 170, 0.02) 300deg, 
-                    transparent 360deg);
-            animation: rotate 60s linear infinite;
-            z-index: 0;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
         }
 
         .hero-content {
@@ -180,12 +135,10 @@
             grid-template-columns: 1fr 1fr;
             gap: var(--spacing-4xl);
             align-items: center;
-            position: relative;
-            z-index: 2;
         }
 
         .hero-text h1 {
-            font-size: 50px;
+            font-size: 60px;
             font-weight: 800;
             line-height: 1.2;
             margin-bottom: var(--spacing-lg);
@@ -236,53 +189,92 @@
             position: relative;
             border-radius: 20px;
             overflow: hidden;
+            background: rgba(26, 35, 50, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .ai-brain-image {
+        .spline-container {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease;
+            position: relative;
         }
 
-        .ai-brain-image:hover {
-            transform: scale(1.05);
+        .spline-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 20px;
+        }
+
+        .spline-fallback {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 35, 50, 0.8);
+            border-radius: 20px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .fallback-brain {
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        .brain-pulse {
+            width: 60px;
+            height: 60px;
+            border: 3px solid var(--accent-primary);
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
         /* Features Section */
         .features {
             padding: var(--spacing-4xl) 0;
+            background: var(--surface);
         }
 
         .section-title {
+            text-align: center;
             font-size: 48px;
             font-weight: 700;
-            margin-bottom: var(--spacing-2xl);
-            letter-spacing: -0.025em;
-            text-align: center;
+            margin-bottom: var(--spacing-3xl);
+            background: linear-gradient(45deg, var(--text-primary) 0%, var(--accent-primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--spacing-lg);
-            margin-top: var(--spacing-2xl);
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--spacing-xl);
         }
 
         .feature-card {
-            background: var(--surface);
-            border-radius: 16px;
+            background: var(--surface-elevated);
             padding: var(--spacing-xl);
+            border-radius: 16px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
-            box-shadow: var(--shadow-lg);
         }
 
         .feature-card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-8px);
             box-shadow: var(--shadow-glow);
+            border-color: var(--accent-primary);
         }
 
         .feature-icon {
@@ -290,13 +282,12 @@
             height: 48px;
             color: var(--accent-primary);
             margin-bottom: var(--spacing-md);
-            stroke-width: 2;
         }
 
         .feature-card h3 {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 600;
-            margin-bottom: 12px;
+            margin-bottom: var(--spacing-sm);
             color: var(--text-primary);
         }
 
@@ -305,113 +296,112 @@
             line-height: 1.6;
         }
 
-        /* Case Studies Section */
+        /* Case Studies */
         .case-studies {
             padding: var(--spacing-4xl) 0;
-            background: linear-gradient(180deg, transparent 0%, rgba(36, 52, 71, 0.3) 100%);
+            background: var(--primary-bg);
         }
 
         .tabs {
             display: flex;
-            gap: var(--spacing-sm);
-            margin-bottom: var(--spacing-xl);
             justify-content: center;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-2xl);
             flex-wrap: wrap;
         }
 
         .tab {
             padding: 12px 24px;
-            font-size: 16px;
-            font-weight: 500;
-            border-radius: 12px;
-            transition: all 0.2s ease;
             background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 9999px;
             color: var(--text-secondary);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            cursor: pointer;
             text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
         }
 
-        .tab.active,
         .tab:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+
+        .tab.active {
             background: var(--accent-primary);
+            border-color: var(--accent-primary);
             color: var(--primary-bg);
-            box-shadow: var(--shadow-glow);
         }
 
         .case-study-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--spacing-4xl);
-            align-items: start;
-        }
-
-        .case-study-card {
-            background: var(--surface);
-            border-radius: 16px;
-            padding: var(--spacing-xl);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .case-study-card h3 {
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: var(--spacing-md);
-            color: var(--accent-primary);
-        }
-
-        .case-study-card .metrics {
-            background: rgba(0, 212, 170, 0.1);
-            border: 1px solid var(--accent-primary);
-            border-radius: 8px;
-            padding: var(--spacing-md);
-            margin: var(--spacing-md) 0;
-            color: var(--accent-primary);
-            font-weight: 600;
-        }
-
-        .case-study-card h4 {
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--text-accent);
-            margin-top: var(--spacing-lg);
-            margin-bottom: var(--spacing-sm);
-        }
-        .case-study-card ul {
-            list-style-position: inside;
-            padding-left: var(--spacing-sm);
-            color: var(--text-secondary);
-        }
-        .case-study-card ul li {
-            margin-bottom: var(--spacing-sm);
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .case-study-panel {
             display: none;
         }
+
         .case-study-panel.active {
             display: block;
-            animation: fadeIn 0.5s ease-in-out;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .case-study-card {
+            background: var(--surface-elevated);
+            padding: var(--spacing-2xl);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .case-study-card h3 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: var(--spacing-lg);
+            color: var(--accent-primary);
+        }
+
+        .case-study-card h4 {
+            font-size: 20px;
+            font-weight: 600;
+            margin: var(--spacing-lg) 0 var(--spacing-sm) 0;
+            color: var(--text-primary);
+        }
+
+        .case-study-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .case-study-card ul {
+            margin: var(--spacing-md) 0;
+            padding-left: var(--spacing-lg);
+        }
+
+        .case-study-card li {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .case-study-card li strong {
+            color: var(--accent-primary);
         }
 
         /* Contact Form */
         .contact-form {
             background: var(--surface);
+            padding: var(--spacing-2xl);
             border-radius: 16px;
-            padding: var(--spacing-xl);
+            margin-top: var(--spacing-2xl);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .contact-form h3 {
             font-size: 24px;
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: var(--spacing-lg);
-            color: var(--text-primary);
+            color: var(--accent-primary);
+            text-align: center;
         }
 
         .form-group {
@@ -421,21 +411,20 @@
         .form-group input,
         .form-group textarea {
             width: 100%;
-            background: var(--primary-bg);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
             padding: var(--spacing-md);
-            font-size: 16px;
+            background: var(--surface-elevated);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
             color: var(--text-primary);
             font-family: var(--font-family);
-            transition: all 0.3s ease;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
         }
 
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
             border-color: var(--accent-primary);
-            box-shadow: 0 0 0 3px rgba(0, 212, 170, 0.1);
         }
 
         .form-group input::placeholder,
@@ -445,13 +434,13 @@
 
         .form-submit {
             width: 100%;
+            padding: var(--spacing-md);
             background: var(--accent-primary);
             color: var(--primary-bg);
-            font-size: 16px;
-            font-weight: 600;
-            padding: var(--spacing-md) var(--spacing-xl);
-            border-radius: 9999px;
             border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: var(--shadow-glow);
@@ -464,26 +453,19 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .hero-content,
-            .case-study-content {
+            .hero-content {
                 grid-template-columns: 1fr;
                 gap: var(--spacing-2xl);
-            }
-
-            .hero-visual {
-                display: none;
-            }
-
-            .hero-text {
                 text-align: center;
             }
 
             .hero-text h1 {
-                font-size: 36px;
+                font-size: 40px;
             }
 
-            .section-title {
-                font-size: 32px;
+            .ai-brain {
+                width: 350px;
+                height: 350px;
             }
 
             .nav {
@@ -499,7 +481,7 @@
                 align-items: center;
             }
         }
-  </style>
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -512,28 +494,43 @@
                     <a href="#cases">Кейсы</a>
                     <a href="#contact">Контакты</a>
                 </nav>
-                <a href="#contact" class="header-cta">Начать проект</a>
+                <a href="https://t.me/NauD_A" class="header-cta">Обсудить проект</a>
             </div>
         </div>
-  </header>
+    </header>
 
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
-                    <h1>Автоматизация бизнес-процессов с искусственным интеллектом</h1>
-                    <p>Мы создаем интеллектуальные системы, которые автоматизируют рутинные задачи, анализируют данные и принимают решения, освобождая ваше время для стратегического развития бизнеса.</p>
+                    <h1>Автоматизация бизнес-процессов с помощью ИИ</h1>
+                    <p>Мы создаем интеллектуальные системы для автоматизации рутинных задач, анализа данных и оптимизации бизнес-процессов. Сокращаем время обработки документов до 90% и повышаем эффективность вашей команды.</p>
                     <a href="#contact" class="hero-cta">
-                        Обсудить проект
+                        Начать автоматизацию
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="m9 18 6-6-6-6"/>
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
                         </svg>
                     </a>
                 </div>
                 <div class="hero-visual">
                     <div class="ai-brain">
-                        <img src="ai_image.png" alt="AI Brain" class="ai-brain-image">
+                        <div class="spline-container">
+                            <div class="spline-fallback" id="spline-fallback">
+                                <div class="fallback-brain">
+                                    <div class="brain-pulse"></div>
+                                    <p>Загрузка 3D модели...</p>
+                                </div>
+                            </div>
+                            <iframe 
+                                class="spline-iframe" 
+                                id="spline-iframe"
+                                src="https://my.spline.design/particleuibrain-8wBCpqdYdU5uqcT2SYiQhrlD/"
+                                frameborder="0"
+                                onload="hideSplineFallback()"
+                                onerror="showSplineError()">
+                            </iframe>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -702,7 +699,7 @@
                                 <li><strong>Эффективность мониторинга:</strong> Сокращение времени на ручной сбор данных.</li>
                                 <li><strong>Принятие решений:</strong> Повышение точности и оперативности благодаря актуальным данным.</li>
                                 <li><strong>Маркетинг и продвижение:</strong> Оптимизация кампаний и ценообразования.</li>
-    </ul>
+                            </ul>
 
                             <h4>Модификации и возможности</h4>
                             <p>Система может быть адаптирована для управления запасами, адаптации ценообразования, разработки продуктов, генерации контента для маркетинговых кампаний и стратегического планирования.</p>
@@ -727,44 +724,31 @@
                         </div>
                         <button type="submit" class="form-submit">Отправить заявку</button>
                     </form>
-                    
-                    <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center;">
-                        <p style="color: var(--text-secondary); margin-bottom: 12px;">Или свяжитесь напрямую:</p>
-                        <a href="https://t.me/NauD_A" style="color: var(--accent-primary); text-decoration: none; font-weight: 600;">
-                            📱 Telegram: @NauD_A
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>
-  </section>
+    </section>
 
     <script>
-        // Интерактивность для табов с кейсами
-        const tabs = document.querySelectorAll('.tab');
-        const panels = document.querySelectorAll('.case-study-panel');
-
-        tabs.forEach(tab => {
-            tab.addEventListener('click', (e) => {
+        // Tabs functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function(e) {
                 e.preventDefault();
                 
-                // Сначала убираем класс active у всех вкладок и панелей
-                tabs.forEach(t => t.classList.remove('active'));
-                panels.forEach(p => p.classList.remove('active'));
+                // Remove active class from all tabs and panels
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.case-study-panel').forEach(p => p.classList.remove('active'));
                 
-                // Затем добавляем класс active к нажатой вкладке
-                tab.classList.add('active');
+                // Add active class to clicked tab
+                this.classList.add('active');
                 
-                // И к соответствующей ей панели
-                const targetPanelId = tab.getAttribute('data-tab');
-                const targetPanel = document.querySelector(`.case-study-panel[data-tab="${targetPanelId}"]`);
-                if (targetPanel) {
-                    targetPanel.classList.add('active');
-                }
+                // Show corresponding panel
+                const tabId = this.getAttribute('data-tab');
+                document.querySelector(`[data-tab="${tabId}"].case-study-panel`).classList.add('active');
             });
         });
 
-        // Плавная прокрутка для навигации
+        // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -778,7 +762,61 @@
             });
         });
 
-        // Анимация появления элементов при скролле
+        // Spline iframe management
+        function hideSplineFallback() {
+            const fallback = document.getElementById('spline-fallback');
+            if (fallback) {
+                fallback.style.display = 'none';
+            }
+        }
+
+        function showSplineError() {
+            const fallback = document.getElementById('spline-fallback');
+            if (fallback) {
+                fallback.innerHTML = `
+                    <div class="fallback-brain">
+                        <div style="color: #ff6b6b; font-size: 24px; margin-bottom: 16px;">⚠️</div>
+                        <p>Не удалось загрузить 3D модель</p>
+                        <p style="font-size: 14px; opacity: 0.7;">Проверьте подключение к интернету</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Try to load Spline with timeout
+        setTimeout(() => {
+            const iframe = document.getElementById('spline-iframe');
+            const fallback = document.getElementById('spline-fallback');
+            
+            if (iframe && fallback && fallback.style.display !== 'none') {
+                // If fallback is still visible after 10 seconds, show error
+                showSplineError();
+            }
+        }, 10000);
+
+        // Form submission
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            
+            // Simple validation
+            if (!data.name || !data.email || !data.message) {
+                alert('Пожалуйста, заполните все обязательные поля');
+                return;
+            }
+            
+            // Here you would typically send the data to your server
+            // For now, we'll just show a success message
+            alert('Спасибо за заявку! Мы свяжемся с вами в ближайшее время.');
+            
+            // Reset form
+            this.reset();
+        });
+
+        // Add scroll animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -793,12 +831,12 @@
             });
         }, observerOptions);
 
-        // Применяем анимацию к карточкам
-        document.querySelectorAll('.feature-card, .case-study-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(30px)';
-            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(card);
+        // Observe elements for animation
+        document.querySelectorAll('.feature-card, .case-study-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
         });
     </script>
 </body>
