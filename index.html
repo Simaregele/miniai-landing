@@ -864,6 +864,20 @@
             const MAX_VISITED = 2;
             const delay = 100;
 
+            // Seeded random number generator для фиксированных позиций
+            function seededRandom(seed) {
+                let state = seed;
+                return function() {
+                    state = (state * 9301 + 49297) % 233280;
+                    return state / 233280;
+                };
+            }
+            
+            const fixedRandom = seededRandom(12345); // Фиксированный seed
+            
+            // ВАЖНО: fixedRandom используется только для генерации позиций узлов
+            // Math.random() используется для анимации walker'ов (чтобы сохранить динамичность)
+
             const svg = document.getElementById('network-svg');
             const container = document.getElementById('wrapper');
             const brainPath = document.getElementById('brainPath');
@@ -891,8 +905,8 @@
                         // Check if point is inside ellipse
                         if ((normalizedX * normalizedX) + (normalizedY * normalizedY) <= 1) {
                             // Add small random offset for natural look
-                            const offsetX = (Math.random() - 0.5) * 0.3;
-                            const offsetY = (Math.random() - 0.5) * 0.3;
+                            const offsetX = (fixedRandom() - 0.5) * 0.3;
+                            const offsetY = (fixedRandom() - 0.5) * 0.3;
                             
                             const x = centerX + (normalizedX + offsetX) * radiusX * 0.9;
                             const y = centerY + (normalizedY + offsetY) * radiusY * 0.9;
@@ -911,8 +925,8 @@
             const centerX = 400, centerY = 300, radiusX = 280, radiusY = 200;
             let attempts = 0;
             while (nodes.length < N && attempts < N * 2) {
-                const angle = Math.random() * Math.PI * 2;
-                const radius = Math.sqrt(Math.random()) * 0.9; // Square root for uniform distribution
+                const angle = fixedRandom() * Math.PI * 2;
+                const radius = Math.sqrt(fixedRandom()) * 0.9; // Square root for uniform distribution
                 const x = centerX + radius * radiusX * Math.cos(angle);
                 const y = centerY + radius * radiusY * Math.sin(angle);
                 nodes.push({ id: nodes.length, x, y });
