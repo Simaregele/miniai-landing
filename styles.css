@@ -260,10 +260,11 @@ body {
 .active, .visited {
     fill: #fff !important;
     stroke: #00d4aa !important; /* Changed to match site theme */
+    stroke-width: 2.5px !important;
     transform-box: fill-box;
     transform-origin: center;
-    transform: scale(1.3); /* Reduced from 1.5 */
-    filter: url(#glow);
+    transform: scale(1.7); /* Reduced from 1.5 */
+    filter: drop-shadow(0 0 16px #00d4aa) drop-shadow(0 0 32px #00d4aa);
     will-change: transform;
 }
 
