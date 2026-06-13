@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document Translation Service | MiniAI</title>
+  <meta name="description" content="Document translation, proofreading, and localization service. Secure payment by Bank of Georgia payment link after order confirmation.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #101820;
+      --panel: #172431;
+      --panel-2: #203245;
+      --text: #f6f8fb;
+      --muted: #b7c4d1;
+      --line: rgba(255, 255, 255, 0.12);
+      --accent: #22c7a9;
+      --accent-2: #f6b84b;
+      --danger: #ff7a59;
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 18% 12%, rgba(34, 199, 169, 0.20), transparent 32%),
+        radial-gradient(circle at 78% 24%, rgba(246, 184, 75, 0.15), transparent 30%),
+        linear-gradient(135deg, #101820 0%, #172431 52%, #101820 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .page {
+      min-height: 100vh;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    header {
+      border-bottom: 1px solid var(--line);
+      background: rgba(16, 24, 32, 0.78);
+      backdrop-filter: blur(16px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .nav {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      color: var(--accent);
+      font-size: 22px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 78px 0 42px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.72fr);
+      gap: 44px;
+      align-items: start;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 32px;
+      height: 2px;
+      background: var(--accent);
+      border-radius: 999px;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin: 0 0 22px;
+      font-size: clamp(38px, 6vw, 70px);
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 720px;
+      margin: 0 0 30px;
+      color: var(--muted);
+      font-size: 19px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 12px 18px;
+      border-radius: 8px;
+      background: var(--accent);
+      color: #061310;
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: 0 12px 36px rgba(34, 199, 169, 0.24);
+    }
+
+    .button.secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--line);
+      box-shadow: none;
+    }
+
+    .summary {
+      background: rgba(23, 36, 49, 0.84);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: 26px;
+    }
+
+    .summary h2 {
+      margin: 0 0 16px;
+      font-size: 22px;
+    }
+
+    .price-line {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .price-line:last-child {
+      border-bottom: 0;
+    }
+
+    .price-line strong {
+      display: block;
+      font-size: 15px;
+    }
+
+    .price-line span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .price {
+      color: var(--accent-2);
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .section {
+      padding: 34px 0;
+    }
+
+    .section h2 {
+      margin: 0 0 18px;
+      font-size: 30px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: rgba(23, 36, 49, 0.74);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 22px;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+
+    .card p,
+    .card li {
+      color: var(--muted);
+    }
+
+    .card p {
+      margin: 0;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .terms {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 18px;
+    }
+
+    .notice {
+      color: var(--muted);
+      border-left: 3px solid var(--accent);
+      padding: 12px 0 12px 16px;
+      margin-top: 18px;
+    }
+
+    .request-form {
+      display: grid;
+      gap: 16px;
+    }
+
+    .request-form label {
+      display: grid;
+      gap: 7px;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .request-form input,
+    .request-form textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(16, 24, 32, 0.72);
+      color: var(--text);
+      font: inherit;
+      min-height: 46px;
+      padding: 12px 13px;
+      outline: none;
+    }
+
+    .request-form textarea {
+      resize: vertical;
+      min-height: 112px;
+    }
+
+    .request-form input:focus,
+    .request-form textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(34, 199, 169, 0.16);
+    }
+
+    .file-control {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      min-height: 46px;
+    }
+
+    .file-control input[type="file"] {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .file-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(32, 50, 69, 0.86);
+      color: var(--text);
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .file-name {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
+      overflow-wrap: anywhere;
+    }
+
+    .form-note {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    footer {
+      margin-top: 38px;
+      padding: 28px 0 36px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 860px) {
+      .nav {
+        height: auto;
+        padding: 18px 0;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+
+      .hero {
+        padding-top: 46px;
+      }
+
+      .hero-grid,
+      .grid-3,
+      .terms {
+        grid-template-columns: 1fr;
+      }
+
+      .summary {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="container nav">
+        <a class="brand" href="/">MiniAI</a>
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="#pricing">Pricing</a>
+          <a href="#request">Request</a>
+          <a href="#workflow">Workflow</a>
+          <a href="#terms">Terms</a>
+          <a href="https://t.me/NauD_A">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-grid">
+          <div>
+            <div class="eyebrow">Document translation</div>
+            <h1>Translation Service</h1>
+            <p class="lead">
+              I provide document translation, proofreading, and localization for private and business clients.
+              Each order is reviewed before payment, and the final amount is confirmed in advance.
+            </p>
+            <div class="hero-actions">
+              <a class="button" href="#request">Request a quote</a>
+              <a class="button secondary" href="#pricing">View pricing</a>
+            </div>
+          </div>
+
+          <aside class="summary" id="pricing" aria-label="Pricing summary">
+            <h2>Pricing</h2>
+            <div class="price-line">
+              <div>
+                <strong>First order</strong>
+                <span>1 document unit, up to 650,000 source characters</span>
+              </div>
+              <div class="price">$12.00</div>
+            </div>
+            <div class="price-line">
+              <div>
+                <strong>Repeat order</strong>
+                <span>For a returning client or second order</span>
+              </div>
+              <div class="price">$10.50</div>
+            </div>
+            <div class="price-line">
+              <div>
+                <strong>Special / loyalty rate</strong>
+                <span>For repeat, bulk, or custom-discount cases</span>
+              </div>
+              <div class="price">$9.50</div>
+            </div>
+            <p class="notice">
+              Custom discounts may be applied directly to the final payment amount.
+            </p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container grid-3">
+          <article class="card">
+            <h3>What is included</h3>
+            <ul>
+              <li>Document translation</li>
+              <li>Proofreading and editing</li>
+              <li>Basic localization for digital delivery</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Document size</h3>
+            <p>
+              One service unit covers one document with up to 650,000 source characters.
+              Larger or unusually complex files are quoted separately.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Payment</h3>
+            <p>
+              After the order details are confirmed, the client receives a secure Bank of Georgia payment link.
+              Work starts after payment confirmation.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="request">
+        <div class="container">
+          <h2>Request a Translation Quote</h2>
+          <div class="terms">
+            <form class="card request-form" id="quote-form">
+              <h3>Order details</h3>
+              <label>
+                Email for payment link
+                <input type="email" name="email" placeholder="client@example.com" required>
+              </label>
+              <label>
+                Source language
+                <input type="text" name="source" placeholder="English" required>
+              </label>
+              <label>
+                Target language
+                <input type="text" name="target" placeholder="Russian" required>
+              </label>
+              <label>
+                Document file
+                <span class="file-control">
+                  <input id="document-file" type="file" name="document" accept=".pdf,.doc,.docx,.txt,.rtf,.epub,.html,.md">
+                  <span class="file-button" role="button" tabindex="0" aria-controls="document-file">Attach document</span>
+                  <span class="file-name" id="file-name">No file selected</span>
+                </span>
+              </label>
+              <label>
+                Notes
+                <textarea name="notes" rows="4" placeholder="Deadline, formatting requirements, glossary, or discount details"></textarea>
+              </label>
+              <button class="button" type="submit">Prepare request</button>
+              <p class="form-note" id="form-note">
+                The file is not uploaded automatically on this static page. After preparing the request, attach the document in Telegram.
+              </p>
+            </form>
+
+            <article class="card">
+              <h3>What happens next</h3>
+              <ul>
+                <li>You send the file and email for the payment link.</li>
+                <li>I review the document size and confirm the final price.</li>
+                <li>You receive a secure Bank of Georgia payment link by email or messenger.</li>
+                <li>Translation work starts after payment confirmation.</li>
+              </ul>
+              <p class="notice">
+                For larger documents, the final quote can use a custom discount or split the work into several service units.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="workflow">
+        <div class="container">
+          <h2>Workflow</h2>
+          <div class="grid-3">
+            <article class="card">
+              <h3>1. File review</h3>
+              <p>Send the document or a description of the task. I confirm the language pair, size, and delivery format.</p>
+            </article>
+            <article class="card">
+              <h3>2. Payment link</h3>
+              <p>The final amount is confirmed before payment. Discounts are included in the payment-link total.</p>
+            </article>
+            <article class="card">
+              <h3>3. Delivery</h3>
+              <p>The translated document is delivered digitally by messenger or another agreed online channel.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="terms">
+        <div class="container">
+          <h2>Terms</h2>
+          <div class="terms">
+            <article class="card">
+              <h3>Order confirmation</h3>
+              <p>
+                The service scope, price, delivery format, and timing are agreed before a payment link is issued.
+                The payment link reflects the final amount for the confirmed order.
+              </p>
+            </article>
+            <article class="card">
+              <h3>Cancellation and refunds</h3>
+              <p>
+                If work has not started, cancellation can be requested through the same contact channel.
+                Once translation work has started, refund eligibility depends on the completed portion of the service.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        MiniAI · Document Translation Service · Contact: <a href="https://t.me/NauD_A">@NauD_A</a>
+      </div>
+    </footer>
+  </div>
+  <script>
+    const quoteForm = document.getElementById("quote-form");
+    const formNote = document.getElementById("form-note");
+    const documentFile = document.getElementById("document-file");
+    const fileButton = document.querySelector(".file-button");
+    const fileName = document.getElementById("file-name");
+
+    fileButton.addEventListener("click", () => documentFile.click());
+    fileButton.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        documentFile.click();
+      }
+    });
+
+    documentFile.addEventListener("change", () => {
+      fileName.textContent = documentFile.files.length ? documentFile.files[0].name : "No file selected";
+    });
+
+    quoteForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const data = new FormData(quoteForm);
+      const file = data.get("document");
+      const lines = [
+        "Translation quote request",
+        `Email for payment link: ${data.get("email") || ""}`,
+        `Source language: ${data.get("source") || ""}`,
+        `Target language: ${data.get("target") || ""}`,
+        `File: ${file && file.name ? file.name : "I will attach it here"}`,
+        `Notes: ${data.get("notes") || "-"}`
+      ];
+
+      const url = `https://t.me/NauD_A?text=${encodeURIComponent(lines.join("\n"))}`;
+      formNote.textContent = "Telegram will open with the request text. Attach the document file in the chat before sending.";
+      window.open(url, "_blank", "noopener,noreferrer");
+    });
+  </script>
+</body>
+</html>
